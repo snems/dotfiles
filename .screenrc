@@ -1,0 +1,55 @@
+
+stufmcreen-256color
+term xterm-256color
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+defbce on    # use current bg color for erased chars
+
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
+
+screen -t vim
+screen -t console
+screen -t console
+screen -t console
+screen -t "local serial"
+screen -t "remote serial"
+screen -t telnet
+screen -t telnet
+screen -t Avigdor_1
+screen -t Avigdor_2
+screen -t console
+screen -t mc 
+screen -t twistd 
+
+
+select 0                                                                                           
+stuff "nvim^M"          
+select 1                                                                                           
+stuff "^M"          
+select 2                                                                                           
+stuff "^M"          
+select 3                                                                                           
+stuff "^M"          
+select 4                                                                                           
+stuff "sudo minicom -D /dev/ttyUSB0^M"          
+select 5                                                                                           
+stuff "ssh console-1@192.168.3.6^M"          
+select 6                                                                                           
+stuff "~/scripts/avigdor/telnet_to_switch.sh^M"          
+select 7                                                                                           
+stuff "~/scripts/avigdor/telnet_to_switch.sh^M"          
+select 8                                                                                           
+stuff "cd /home/snems/src/Avigdor_1^M"          
+select 9                                                                                           
+stuff "cd /home/snems/src/Avigdor_2^M"          
+select 10                                                                                           
+stuff "^M"          
+select 11                                                                                           
+stuff "mc^M"          
+select 12                                                                                           
+stuff "usr/bin/python /usr/bin/twistd -n ftp -r /mnt/ftp"
+
+select 3                                                                                           
+
