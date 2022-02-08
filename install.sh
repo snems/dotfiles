@@ -1,35 +1,43 @@
 #!/usr/bin/env bash
 
+USER=user
+
+MESSAGE_PREFIX="                "
+
+message_start_action()
+{
+	echo "${MESSAGE_PREFIX}"$1"..."
+}
+
+message_end_action()
+{
+	echo $MESSAGE_PREFIX$1.
+}
+
 create_directories() {
-    mkdir -pv ~/{Downloads,Documents,Work,Sources,Dev,Org,Work,Pictures/Screenshots}/
+    mkdir -pv ~/{Downloads,Documents,Work,src,Dev,Org,Work,Pictures/Screenshots}/
 }
 
 install_deb_packages() {
+	message_start_action "installing apt packages"
     sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install $(grep -vE "^\s*#" ~/dotfiles/packages.deb.txt  | tr "\n" " ")
-    sudo apt-get autoremove
-    sudo apt-get autoclean
-    sudo apt-get clean
-
-    cd /tmp/
-
-    wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat-musl_0.18.1_amd64.deb
-    sudo dpkg -i bat-musl_0.18.1_amd64.deb
-
-    wget https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
-    sudo dpkg -i ripgrep_13.0.0_amd64.deb
-
-    wget https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
-    sudo dpkg -i fd_8.2.1_amd64.deb
+    sudo apt-get upgrade -y
+    sudo apt-get install -y $(grep -vE "^\s*#" ./packages.deb.txt  | tr "\n" " ")
+    sudo apt-get autoremove -y
+    sudo apt-get autoclean -y
+    sudo apt-get clean -y
 }
 
-install_neovim() {
-    cd ~/Sources/
+setup_neovim() {
+    message_start_action "installing neovim"
+    cd ~/src/
     git clone https://github.com/neovim/neovim
     cd neovim
     git checkout v0.5.0
     make distclean && make CMAKE_BUILD_TYPE=RelWithDebInfo -j4 && sudo make install
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 1
+	sudo update-alternatives --set vi /usr/local/bin/nvim
 }
 
 install_firefox() {
@@ -53,9 +61,8 @@ install_packages() {
         exit 1
     fi
 
-    install_neovim
-    install_firefox
-    install_thunderbird
+    #install_firefox
+    #install_thunderbird
 }
 
 create_symlinks() {
@@ -73,8 +80,35 @@ create_symlinks() {
     done
 }
 
+setup_shell()
+{
+	git clone https://github.com/so-fancy/diff-so-fancy.git ~/src/diff-so-fancy
+	git clone https://github.com/zsh-users/antigen.git ~/.local/antigen  
+    message_start_action "setup shell"
+    chsh --shell `which zsh`
+}
+
+setup_keyboard()
+{
+    message_start_action "setup keyboard"
+    #setxkbmap -layout "us,ru" -option ctrl:swapcaps grp:alt_shift_toggle
+    setxkbmap -layout "us,ru" -option grp:alt_shift_toggle
+}
+
+
 if [[ $2 == "-A" ]]; then
     create_directories
     install_packages
 fi
+
+setup_keyboard
+create_directories
+install_packages
 create_symlinks .
+setup_shell
+setup_neovim
+
+message_end_action "All done".
+
+
+

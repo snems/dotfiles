@@ -3,6 +3,7 @@ filemode = false
 editor = nvim
 pager = diff-so-fancy | less --tabs=4 -RFX
 quotePath = false
+	excludesFile = ~/.gitexclude
 
 [init]
 defaultBranch = master
@@ -41,11 +42,11 @@ smudge = git-lfs smudge -- %f
 process = git-lfs filter-process
 
 [github]
-user = jubnzv
+user = snems
 
 [user]
-name = Georgy Komarov
-email = jubnzv@gmail.com
+	name = Alexandr Bushuev
+	email = zxsnems@gmail.com
 
 [includeIf "gitdir:~/Work/*"]
 path = ~/.gitconfig.work

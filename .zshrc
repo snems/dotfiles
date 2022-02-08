@@ -1,4 +1,4 @@
-# {{{ Plugins
+ # {{{ Plugins
 if [[ ! -f ~/.zplug/init.zsh ]]; then
 	git clone https://github.com/b4b4r07/zplug ~/.zplug
 fi
@@ -10,7 +10,7 @@ if [[ -f ~/.zplug/init.zsh ]] ; then
     zplug "tarruda/zsh-autosuggestions", use:"zsh-autosuggestions.zsh"
 
     # Syntax highlighting
-    zplug "zdharma/fast-syntax-highlighting", defer:3
+    zplug "zdharma-continuum/fast-syntax-highlighting", defer:3
 
     # Color parens and highlight matching paren
     export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -29,13 +29,25 @@ if [[ -f ~/.zplug/init.zsh ]] ; then
     # Source plugins and add commands to $PATH
     zplug load
 fi
-# }}}
+
+# Plugin manager
+source ~/.local/antigen/antigen.zsh
+
+# Plugins
+antigen use oh-my-zsh
+
+# Theme
+antigen theme bhilburn/powerlevel9k
+antigen bundle zsh-users/zsh-autosuggestions
+
+antigen apply
 
 fpath=( ~/.zfunc ~/.zsh/zsh-completions/src/ "${fpath[@]}" )
 
 if [[ -x "$(command -v zoxide)" ]]; then
     eval "$(zoxide init zsh)"
 fi
+# }}}
 
 # {{{ Global variables
 # Golang workspace location. References:
@@ -60,6 +72,7 @@ export PATH=$PATH:$HOME/.luarocks/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOPATH/bin/
 export PATH=$PATH:$LLVM/
+export PATH=$PATH:~/src/diff-so-fancy/
 # export PATH=$PATH:$HOME/.dotnet
 
 if [ -f /etc/arch-release ]; then
@@ -67,14 +80,11 @@ if [ -f /etc/arch-release ]; then
 fi
 
 # Default username for https://hub.docker.com
-export DOCKER_ID_USER="jubnzv1"
+export DOCKER_ID_USER="snems"
 
 # Shortcuts for common tools
 export CPPCHECK=$HOME/Dev/cppcheck/
-export FLAMEGRAPH=$HOME/Dev/tools/FlameGraph
 
-# Debian tools
-export QUILT_PATCHES=debian/patches
 
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 # Make Java UI not so ugly.
@@ -87,7 +97,7 @@ export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
 export EDITOR="nvim"
-export DEBEMAIL="jubnzv@gmail.com"
+export DEBEMAIL="zxsnems@gmail.com"
 export ALTERNATE_EDITOR="nvim-qt"
 export MANPAGER="nvim -c 'set ft=man nomod nolist' -c 'map q :q<CR>' -"
 export TERMCMD="alacritty"
@@ -104,6 +114,14 @@ fi
 # }}}
 
 # {{{ Prompt & colors
+
+# Disable ugly autocompleteon after tab.
+
+setopt noautomenu
+
+# FASD
+eval "$(fasd --init posix-alias zsh-hook)"
+
 autoload -U colors && colors # Enable colorized prompt
 export CLICOLORS=1
 
@@ -184,9 +202,9 @@ setopt HIST_REDUCE_BLANKS
 # Don't store lines beginning with a space
 setopt HIST_IGNORE_SPACE
 alias history='history -i'
-# }}}
 
-# }}}
+
+
 
 # {{{ Aliases
 # Common
@@ -210,9 +228,6 @@ alias getip='dig +short myip.opendns.com @resolver1.opendns.com'
 lfind() { find . -iname $@ 2>/dev/null }
 
 alias gdb='gdb -q'
-
-# Debian tools
-alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 
 # vim
 alias v='nvim'
@@ -289,44 +304,10 @@ alias ll='ls -oh'
 alias diffdir='diff -ENwbur'
 alias cpd='cpdiff'
 
-# {{{ taskwarrior
-if [[ -x "$(command -v task)" ]]; then
-    alias t="task"                        # Default `task next` report
-    alias tt="t recent"                   # Recently added tasks
-    alias tstopall="t rc.gc=off +ACTIVE _ids | xargs task rc.gc=off rc.confirmation=no rc.bulk=yes stop"
-    alias tschedd='task sched.before:today+1d -COMPLETED -DELETED -DUETODAY +PENDING'
-    alias tdued='task due.before:today+1d -COMPLETED -DELETED +PENDING'
-    alias tdoned='t end:today status:completed all'
-    alias tdonew='t end.after:today-7d status:completed all'
-    alias tdonem='t end.after:today-30d status:completed all'
-    alias bwp="bugwarrior-pull"
-
-    # Simplify work with tasks marked with +event
-    alias tel="task +event"
-    tea() {
-        if [ $# -ne 2 ]; then
-            echo "Usage: tea DESCRIPTION DATE"
-            return 1
-        fi
-        task add +event "$1" due:"$2" until:due+1d
-    }
-fi
-
-if [[ -x "$(command -v task)" ]]; then
-    cal() {
-        task calendar
-    }
-else
-    alias cal="cal -3"
-fi
-# }}}
-
-alias exrm="exim4 -bp | grep frozen| awk '{print $3}' | xargs exim4 -Mrm"
-
 # Sequence that disables cursor blinking
 alias stopblink="printf '\033[?12l'"
 
-# Tools
+# {{{ Tools
 alias psmem="sudo $(which ps_mem.py)"
 # }}}
 
@@ -348,17 +329,12 @@ mount_iso() {
 sssh() {
   while true; do command ssh "$@"; [ $? -ne 255 ] && break || sleep 1; done
 }
-# }}}
+
 
 # {{{ Keybindings
-bindkey -e                        # Enable emacs-mode
+bindkey -v                        # Enable vim-mode
 
 autoload -Uz compinit && compinit # Command completion
-
-bindkey '^[а'	emacs-forward-word
-bindkey '^[и'	emacs-backward-word
-bindkey '\ef'   emacs-forward-word
-bindkey '\eb'   emacs-backward-word
 
 # Ctrl+backspace to delete the previous word to slash
 #
@@ -375,12 +351,12 @@ bindkey '^H' backward-kill-dir
 bindkey -s "\ep"  "^Qvimfzf .^J"            # Select file with fzf and open it in vim.
 bindkey -s "\ev"  "^Qv .^J"                 # Open editor in current directory
 bindkey -s '\C-x\C-d' '$(date +%Y-%m-%d)'
-# }}}
 
-# {{{ fzf
+
+# fzf
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
-# {{{ Gruvbox color scheme
+# Gruvbox color scheme
 # https://github.com/nicodebo/base16-fzf/blob/master/bash/base16-gruvbox-dark-soft.config
 _gen_fzf_default_opts() {
 local color00='#32302f'
@@ -408,7 +384,7 @@ export FZF_DEFAULT_OPTS="
 }
 
 _gen_fzf_default_opts
-# }}}
+
 
 export FZF_DEFAULT_OPTS=${FZF_DEFAULT_OPTS}" --bind alt-k:up,alt-j:down,alt-p:previous-history,alt-n:next-history,alt-m:accept,alt-q:cancel,esc:cancel"
 
@@ -469,7 +445,7 @@ export AUTO_NOTIFY_IGNORE=("docker exec" "docker-compose")
 export AUTO_NOTIFY_EXPIRE_TIME=2000
 # }}}
 
-# {{{ Show current directory in the X window title
+# {{{Show current directory in the X window title
 function set-title-precmd() {
   printf "\e]2;%s\a" "${PWD/#$HOME/~} - zsh"
 }
@@ -510,7 +486,7 @@ function start_ssh_agent() {
 # 	start_ssh_agent
 # fi
 # }}}
-
+#
 # {{{ Utilities
 # Shell commands usage statistics
 function zsh_stats() {
@@ -518,9 +494,9 @@ function zsh_stats() {
 		awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
 		grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
 }
-# }}}
+
 
 # Auto start X
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
-
+# }}}
 # vim:foldmethod=marker:foldenable:foldlevel=0:sw=4:tw=120
