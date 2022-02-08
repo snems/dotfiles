@@ -124,3 +124,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Clion
+CMakeLists.txt
+cmake-build-debug
+
+# Morion
+rav
+
+#Source trail
+*.srctrlbm
+*.srctrldb
+*.srctrlprj
+
+# Nyan debug
+nyannyan_ice.h
+

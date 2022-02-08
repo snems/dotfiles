@@ -37,7 +37,8 @@ source ~/.local/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Theme
-antigen theme bhilburn/powerlevel9k
+antigen theme Powerlevel9k/powerlevel9k
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir)
 antigen bundle zsh-users/zsh-autosuggestions
 
 antigen apply
@@ -138,14 +139,15 @@ zmodload -a autocomplete
 zmodload -a complist
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-autoload -Uz vcs_info        # Show git branch name
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats '  %b'
-setopt prompt_subst
 
-function precmd() {
-    vcs_info
-}
+#autoload -Uz vcs_info        # Show git branch name
+#zstyle ':vcs_info:*' enable git
+#zstyle ':vcs_info:git:*' formats '  %b'
+#setopt prompt_subst
+#
+#function precmd() {
+#    vcs_info
+#}
 
 # Set another cursor color when running inside tmux
 # zle-line-init () {
@@ -155,7 +157,8 @@ function precmd() {
 # }
 # zle -N zle-line-init
 
-PS1='%{$fg[yellow]%}$(shrink_path -f)%{$reset_color%}%{$fg[cyan]%}${vcs_info_msg_0_}%{$reset_color%} '
+#PS1='%{$fg[yellow]%}$(shrink_path -f)%{$reset_color%}%{$fg[cyan]%}${vcs_info_msg_0_}%{$reset_color%} '
+PS1='%{$fg[yellow]%}$(shrink_path -f)%{$reset_color%}%{$fg[cyan]%}%{$reset_color%} '
 # }}}
 
 # {{{ zsh options
@@ -202,8 +205,8 @@ setopt HIST_REDUCE_BLANKS
 # Don't store lines beginning with a space
 setopt HIST_IGNORE_SPACE
 alias history='history -i'
-
-
+# git 
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 
 # {{{ Aliases

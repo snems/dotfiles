@@ -14,6 +14,15 @@ message_end_action()
 	echo $MESSAGE_PREFIX$1.
 }
 
+setup_git()
+{
+	message_start_action "setup git"
+	git config --global user.name "Alexandr Bushuev"
+	git config --global user.email zxsnems@gmail.com
+	git config --global core.editor nvim
+	git config --global core.excludesFile '~/.gitignore'
+}
+
 create_directories() {
     mkdir -pv ~/{Downloads,Documents,Work,src,Dev,Org,Work,Pictures/Screenshots}/
 }
@@ -107,6 +116,7 @@ install_packages
 create_symlinks .
 setup_shell
 setup_neovim
+setup_git
 
 message_end_action "All done".
 

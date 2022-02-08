@@ -1,9 +1,9 @@
 [core]
 filemode = false
-editor = nvim
+	editor = nvim
 pager = diff-so-fancy | less --tabs=4 -RFX
 quotePath = false
-	excludesFile = ~/.gitexclude
+	excludesFile = ~/.gitignore
 
 [init]
 defaultBranch = master
@@ -50,3 +50,6 @@ user = snems
 
 [includeIf "gitdir:~/Work/*"]
 path = ~/.gitconfig.work
+[oh-my-zsh]
+	hide-status = 1
+	hide-dirty = 1
