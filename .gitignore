@@ -128,6 +128,8 @@ dmypy.json
 # Clion
 CMakeLists.txt
 cmake-build-debug
+.idea
+.dep
 
 # Morion
 rav
@@ -139,4 +141,5 @@ rav
 
 # Nyan debug
 nyannyan_ice.h
+
 
