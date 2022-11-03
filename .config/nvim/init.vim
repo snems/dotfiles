@@ -13,6 +13,7 @@ Plugin 'lyokha/vim-xkbswitch'                  " Auto switch kb layout in insert
 Plugin 'godlygeek/tabular'                     " vim-markdown requirement
 Plugin 'plasticboy/vim-markdown'               " markdown support
 Plugin 'JamshedVesuna/vim-markdown-preview'    " markdown preview
+Plugin 'vimwiki/vimwiki'                       " wiki
 
 
 " All of your Plugins must be added before the following line
@@ -34,6 +35,10 @@ filetype plugin indent on    " required
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/home/snems/.local/lib/libxkbswitch.so'
 let g:XkbSwitchIMappings = ['ru']
+" ------------------------------------------------------------------------------------------------------------------
+" vimwiki config
+let g:vimwiki_list = [{'path': '/home/snems/wiki/work/', 'syntax': 'markdown',
+                     \ 'ext': '.md'}]
 " ------------------------------------------------------------------------------------------------------------------
 if executable('pyls')
 	    au User lsp_setup call lsp#register_server({
@@ -69,6 +74,10 @@ set completeopt=menuone,noinsert,noselect
 "" " Avoid showing message extra message when using completion
 set shortmess+=c
 " ---------------------------------
-set relativenumber
-set number
+"set relativenumber
+"set number
+
+"set colorcolumn=81
+"set textwidth=80
 "
+

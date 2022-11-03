@@ -4,6 +4,7 @@ tags.temp
 .pyhistory
 taskwarrior/.config/taskwarrior/taskd.rc
 taskwarrior/.config/taskwarrior/*.pem
+.idea
 
 .ipython/*
 !*/ipython_config.py

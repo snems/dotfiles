@@ -67,6 +67,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 # export DOTNET_ROOT=$HOME/.dotnet
 
 # PATH
+export PATH=$PATH:$HOME/.r2env/bin
 export PATH=$PATH:$HOME/.local/bin/
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.luarocks/bin
@@ -74,6 +75,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOPATH/bin/
 export PATH=$PATH:$LLVM/
 export PATH=$PATH:~/src/diff-so-fancy/
+export PATH=$PATH:/hdd/Qt/6.3.1/gcc_64/include
+export PATH=$PATH:/hdd/Qt/6.3.1/gcc_64/lib
 # export PATH=$PATH:$HOME/.dotnet
 
 if [ -f /etc/arch-release ]; then
@@ -100,7 +103,7 @@ export QT_QPA_PLATFORMTHEME='qt5ct'
 export EDITOR="nvim"
 export DEBEMAIL="zxsnems@gmail.com"
 export ALTERNATE_EDITOR="nvim-qt"
-export MANPAGER="nvim -c 'set ft=man nomod nolist' -c 'map q :q<CR>' -"
+#export MANPAGER="nvim -c 'set ft=man nomod nolist' -c 'map q :q<CR>' -"
 export TERMCMD="alacritty"
 export TERMINAL="alacritty -e"
 export USE_EDITOR=$EDITOR

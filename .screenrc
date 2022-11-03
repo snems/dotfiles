@@ -21,7 +21,7 @@ screen -t Avigdor_1
 screen -t Avigdor_2
 screen -t console
 screen -t mc 
-screen -t twistd 
+screen -t \033[1;31m The console 12 12 \033[0m 
 
 
 select 0                                                                                           
