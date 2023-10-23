@@ -1,4 +1,5 @@
- # {{{ Plugins
+export TERM="xterm-256color"
+# {{{ Plugins
 if [[ ! -f ~/.zplug/init.zsh ]]; then
 	git clone https://github.com/b4b4r07/zplug ~/.zplug
 fi
@@ -78,6 +79,7 @@ export PATH=$PATH:~/src/diff-so-fancy/
 export PATH=$PATH:/hdd/Qt/6.3.1/gcc_64/include
 export PATH=$PATH:/hdd/Qt/6.3.1/gcc_64/lib
 # export PATH=$PATH:$HOME/.dotnet
+export PATH="/opt/armv5-marvell-linux-gnueabi-soft-4.8.5_i686/bin/:$PATH"
 
 if [ -f /etc/arch-release ]; then
     export LC_ALL=C

@@ -203,30 +203,47 @@ workspace 3 output HDMI-0
 workspace 4 output HDMI-0
 workspace 10 output HDMI-0
 ##center
-workspace 1 output DVI-0 
-workspace 2 output DVI-0
+workspace 1 output DVI-1 
+workspace 2 output DVI-1
 ##left
-workspace 6 output VGA-0
-workspace 7 output VGA-0
-workspace 8 output VGA-0
+workspace 6 output DVI-0
+workspace 7 output DVI-0
+workspace 8 output DVI-0
 
 #Applications
 assign [class="kitty"] $ws1
 assign [class="firefox"] $ws3
 assign [class="lw"] $ws3
 assign [class="Clion"] $ws1
+assign [class="clion"] $ws1
 assign [class="Telegram"] $ws4
+
 assign [class="Thunderbird"] $ws6
+assign [class="thunderbird"] $ws6
+assign [class="morion_mail"] $ws6
+assign [class="Mozilla Thunderbird"] $ws6
+assign [class="docker"] $ws6
 assign [class="run.sh"] $ws6
+
 assign [class="pcmanfm-qt"] $ws8
 assign [class="KeePassXC"] $ws10
 
+exec i3-msg 'workspace 8; layout tabbed; exec /usr/bin/sleep 1'
 exec i3-msg 'workspace 8; layout tabbed; exec /usr/bin/pcmanfm-qt'
+
+exec i3-msg 'workspace 1; layout tabbed; exec /usr/bin/sleep 1'
 exec i3-msg 'workspace 1; layout tabbed; exec kitty'
+
+exec i3-msg 'workspace 3; layout tabbed; exec /usr/bin/sleep 1'
 exec i3-msg 'workspace 3; layout tabbed; exec /home/snems/.local/bin/firefox'
-exec i3-msg 'workspace 4; exec /home/snems/.local/bin/telegram; split h'
+
+#exec i3-msg 'workspace 4; exec /home/snems/.local/bin/telegram; split h'
+exec i3-msg 'workspace 6; layout tabbed; exec /usr/bin/sleep 1'
 exec i3-msg 'workspace 6; layout tabbed; exec /usr/bin/thunderbird'
-exec i3-msg 'workspace 6; layout tabbed; exec /home/snems/soft/morion_mail/run.sh'
+exec --no-startup-id i3-msg 'workspace 3'
+exec --no-startup-id i3-msg 'workspace 6; layout tabbed; exec /home/snems/soft/morion_mail/run.sh'
+
+exec i3-msg 'workspace 10; layout tabbed; exec /usr/bin/sleep 1'
 exec i3-msg 'workspace 10; layout tabbed; exec /home/snems/.local/bin/keepassxc'
 
 exec --no-startup-id i3-msg 'workspace 3'

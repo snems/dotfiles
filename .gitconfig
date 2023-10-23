@@ -53,3 +53,6 @@ path = ~/.gitconfig.work
 [oh-my-zsh]
 	hide-status = 1
 	hide-dirty = 1
+
+[merge]
+		confilictstyle = diff3

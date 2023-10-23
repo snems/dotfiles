@@ -37,7 +37,7 @@ let g:XkbSwitchLib = '/home/snems/.local/lib/libxkbswitch.so'
 let g:XkbSwitchIMappings = ['ru']
 " ------------------------------------------------------------------------------------------------------------------
 " vimwiki config
-let g:vimwiki_list = [{'path': '/home/snems/wiki/work/', 'syntax': 'markdown',
+let g:vimwiki_list = [{'path': '/home/snems/vimwiki/', 'syntax': 'markdown',
                      \ 'ext': '.md'}]
 " ------------------------------------------------------------------------------------------------------------------
 if executable('pyls')
@@ -80,4 +80,5 @@ set shortmess+=c
 "set colorcolumn=81
 "set textwidth=80
 "
+set mouse= " Disable mouse
 

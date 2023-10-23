@@ -5,6 +5,7 @@ tags.temp
 taskwarrior/.config/taskwarrior/taskd.rc
 taskwarrior/.config/taskwarrior/*.pem
 .idea
+.clangd
 
 .ipython/*
 !*/ipython_config.py
