@@ -20,3 +20,4 @@ i3
 i3-wm
 i3blocks
 zathura
+tmuxp

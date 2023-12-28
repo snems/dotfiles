@@ -1,0 +1,53 @@
+session_name: decompiler  
+
+windows:
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
+
+- window_name: notes
+  shell_command_before:
+    - cd ~/                                 
+    - vim /hdd/documents/notes/decomp_notes.txt   
+
+- window_name: disassembler
+  shell_command_before:
+    - cd ~/src/q3/q3_disasm/
+
+- window_name: build
+  shell_command_before:
+    - cd ~/src/cmmdlib/build/
+
+- window_name: build
+  shell_command_before:
+    - cd ~/src/cmmdlib/build/
+
+- window_name: code
+  shell_command_before:
+    - cd ~/src/cmmdlib/
+    - nvim .
+
+- window_name: code-shell
+  shell_command_before:
+    - cd ~/src/cmmdlib/
+
+- window_name: vanila
+  shell_command_before:
+    - cd ~/src/q3/Quake-III-Arena/code
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           

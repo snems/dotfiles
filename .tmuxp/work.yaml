@@ -1,0 +1,44 @@
+session_name: work  
+windows:
+- window_name: notes
+  shell_command_before:
+    - cd ~/                                 
+    - vim /hdd/documents/notes/notes.txt   
+- window_name: console
+  shell_command_before:
+    - cd ~/                                 
+- window_name: console
+  shell_command_before:
+    - cd ~/                                 
+- window_name: console
+  shell_command_before:
+    - cd ~/                                 
+- window_name: usb-serial
+  shell_command_before:
+    - cd ~/           
+    - sudo minicom -D /dev/ttyUSB0                      
+- window_name: ssh-serial
+  shell_command_before:
+    - cd ~/           
+    - ssh console-1@192.168.3.6
+- window_name: switch-shell
+  shell_command_before:
+    - cd ~/           
+    - ~/scripts/avigdor/telnet_to_switch.sh
+- window_name: switch-shell
+  shell_command_before:
+    - cd ~/           
+    - ~/scripts/avigdor/telnet_to_switch.sh
+- window_name: Avigdor_1
+  shell_command_before:
+    - cd ~/src/Avigdor_1
+- window_name: Avigdor_2
+  shell_command_before:
+    - cd ~/src/Avigdor_2
+- window_name: console
+  shell_command_before:
+    - cd ~/                                 
+- window_name: console
+  shell_command_before:
+    - cd ~/                                 
+
