@@ -6,35 +6,48 @@ windows:
   shell_command_before:
     - cd ~/           
 
-- window_name: notes
+- window_name: cmmdlib-edit
   shell_command_before:
-    - cd ~/                                 
-    - vim /hdd/documents/notes/decomp_notes.txt   
-
-- window_name: disassembler
-  shell_command_before:
-    - cd ~/src/q3/q3_disasm/
-
-- window_name: build
-  shell_command_before:
-    - cd ~/src/cmmdlib/build/
-
-- window_name: build
-  shell_command_before:
-    - cd ~/src/cmmdlib/build/
-
-- window_name: code
-  shell_command_before:
-    - cd ~/src/cmmdlib/
+    - cd ~/src/cmmdlib
     - nvim .
 
-- window_name: code-shell
+- window_name: cmmdlib-build
   shell_command_before:
-    - cd ~/src/cmmdlib/
+    - cd ~/src/cmmdlib/build/
+
+- window_name: decomp-edit
+  shell_command_before:
+    - cd ~/src/q3/q3vm_decompiler/
+    - nvim .
+
+- window_name: decomp-build
+  shell_command_before:
+    - cd ~/src/q3/q3vm_decompiler/build
+
+- window_name: OSPr
+  shell_command_before:
+    - cd ~/src/q3/osp2
+    - nvim .
+
+- window_name: OSPr-build
+  shell_command_before:
+    - cd ~/src/q3/osp2/build/linux-qvm/
 
 - window_name: vanila
   shell_command_before:
     - cd ~/src/q3/Quake-III-Arena/code
+
+- window_name: vanila2
+  shell_command_before:
+    - cd ~/src/q3/Quake-III-Arena/code
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
+
+- window_name: console
+  shell_command_before:
+    - cd ~/           
 
 - window_name: console
   shell_command_before:

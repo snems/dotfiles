@@ -42,7 +42,7 @@ setup_neovim() {
     cd ~/src/
     git clone https://github.com/neovim/neovim
     cd neovim
-    git checkout v0.5.0
+    git checkout v0.9.5
     make distclean && make CMAKE_BUILD_TYPE=RelWithDebInfo -j4 && sudo make install
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 1
@@ -104,6 +104,22 @@ setup_keyboard()
     setxkbmap -layout "us,ru" -option grp:alt_shift_toggle
 }
 
+setup_alacritty()
+{
+    sudo add-apt-repository ppa:aslatter/ppa -y
+    sudo apt-get update
+    sudo apt install alacritty
+}
+
+setup_alacritty_fonts()
+{
+    mkdir -p "$HOME/.fonts"
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
+    unzip -j ./JetBrainsMono.zip -d "$HOME/.fonts"
+    rm ./JetBrainsMono.zip
+    fc-cache -rv
+}
+
 
 if [[ $2 == "-A" ]]; then
     create_directories
@@ -117,6 +133,9 @@ create_symlinks .
 setup_shell
 setup_neovim
 setup_git
+
+setup_alacritty
+setup_alacritty_fonts
 
 message_end_action "All done".
 

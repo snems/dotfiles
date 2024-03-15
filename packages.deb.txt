@@ -1,7 +1,6 @@
 zsh
 zsh-antigen
 libnotify-bin
-kitty
 screen
 make
 cmake
@@ -20,4 +19,5 @@ i3
 i3-wm
 i3blocks
 zathura
+tmux
 tmuxp
