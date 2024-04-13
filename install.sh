@@ -39,14 +39,11 @@ install_deb_packages() {
 
 setup_neovim() {
     message_start_action "installing neovim"
-    cd ~/src/
-    git clone https://github.com/neovim/neovim
-    cd neovim
-    git checkout v0.9.5
-    make distclean && make CMAKE_BUILD_TYPE=RelWithDebInfo -j4 && sudo make install
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 1
-	sudo update-alternatives --set vi /usr/local/bin/nvim
+    curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage
+    chmod a+x nvim.appimage
+    sudo mv ./nvim.appimage /usr/local/bin/nvim
+    sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 1
+    sudo update-alternatives --set vi /usr/local/bin/nvim
 }
 
 install_firefox() {
