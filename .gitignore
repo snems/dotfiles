@@ -128,7 +128,6 @@ dmypy.json
 .pyre/
 
 # Clion
-CMakeLists.txt
 cmake-build-debug
 .idea
 .dep
